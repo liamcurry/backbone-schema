@@ -21,14 +21,17 @@ info.
 Example
 -------
 
+See [tests.js](https://github.com/liamcurry/backbone-schema/blob/master/tests.js)
+for more examples.
+
 ### Basic functionality
 ```javascript
 var User = Backbone.Model.extend({
 
   schema: {
-    nickname: { type: String },
+    nickname: String,
     username: { type: String, required: true },
-    joined: { type: Date }
+    joined: Date
   }
 
   // All your other normal Backbone.Model code...
@@ -48,9 +51,7 @@ liam.set('joined', 'Tues');   // Emits an error because "joined" must be a date.
 var Message = Backbone.Model.extend({
 
   schema: {
-    nickname: {
-      type: String      // Types can be specified as functions...
-    },
+    nickname: String      // Types can be specified as functions...
     text: {
       type: 'string',   // ...or they can be specified as strings.
       required: true    // Makes the attribute required for the model to validate.
