@@ -3,7 +3,7 @@ backbone-schema
 
 [![Build Status](https://secure.travis-ci.org/liamcurry/backbone-schema.png)](http://travis-ci.org/liamcurry/backbone-schema)
 
-A minimalistic and lightweight schema validator for Boilerplate. Loosely
+A minimalistic and lightweight schema validator for Backbone models. Loosely
 inspired by [Mongoose's schema validation](http://mongoosejs.com/docs/guide.html).
 Feel free to fork, modify, and contribute to your needs. Pull requests and
 issues are welcome.
@@ -132,7 +132,7 @@ exist in the schema. It is off by default, but you can enable it by defining
 
 ## TODO
 
-* More tests
+* Tests for validators and client side
 * Better documentation
 * Custom (better) error messages
 * Regex validators
