@@ -1,6 +1,8 @@
 backbone-schema
 ===============
 
+[![Build Status](https://secure.travis-ci.org/liamcurry/backbone-schema.png)](http://travis-ci.org/liamcurry/backbone-schema)
+
 A minimalistic and lightweight schema validator for Boilerplate. Loosely
 inspired by [Mongoose's schema validation](http://mongoosejs.com/docs/guide.html).
 Feel free to fork, modify, and contribute to your needs. Pull requests and
