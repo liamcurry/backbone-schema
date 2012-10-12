@@ -1,0 +1,23 @@
+{   "name": "backbone-schema"
+  , "version": "0.0.1"
+  , "description": "Forced schemas for Backbone models."
+  , "keywords": [ "Backbone", "schema", "model" ]
+  , "repository": {
+      "type": "git"
+    , "url": "git://github.com/liamcurry/backbone-schema.git"
+    }
+  , "author": "Liam Curry <liam@curry.name>"
+  , "engines": { "node": ">= 0.2.0" }
+  , "dependencies": {
+      "underscore": "*"
+    , "backbone": "*"
+    }
+  , "devDependencies": {
+      "mocha": "*"
+    , "should": "*"
+  }
+  , "scripts": {
+      "test": "./node_modules/.bin/mocha tests.js"
+  }
+  , "main": "backbone-schema.js"
+}
