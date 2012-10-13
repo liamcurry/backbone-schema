@@ -136,4 +136,72 @@ describe('When a Backbone models has a schema', function () {
 
   });
 
+  describe('and it has fields with custom validators, it:', function () {
+
+    before(function () {
+      TestModel.prototype.schema = {
+          startDate: {
+            type: Date,
+            validators: [
+              function (val) {
+                var endDate = this.get('endDate');
+                if (endDate && endDate < val) {
+                  return 'Start date cannot be after end date';
+                }
+              }
+            ]
+          }
+        , endDate: {
+          type: Date,
+          validators: [
+            function (val) {
+              var startDate = this.get('startDate');
+              if (startDate && startDate > val) {
+                return 'End date cannot be before start date';
+              }
+            }
+          ]
+        }
+      };
+    });
+
+    it('should not validate when a start date is after an end date', function () {
+      tester.set({
+          startDate: new Date('2012-01-01')
+        , endDate: new Date('2011-01-01')
+      }, { silent: true });
+      should.exist(tester.validate());
+    });
+
+    it('should validate when a start date is before an end date', function () {
+      tester.set({
+        startDate: new Date('2012-01-01')
+      , endDate: new Date('2013-01-01')
+      }, { silent: true });
+      should.not.exist(tester.validate());
+    });
+
+  });
+
+  describe('and it is in strict schema mode, it:', function () {
+
+    before(function () {
+      TestModel.prototype.schema = {
+        _isStrict: true
+      , attr1: String
+      };
+    });
+
+    it('should not validate when an unspecified attribute is set', function () {
+      tester.set({ attr2: 'foobar' }, { silent: true });
+      should.exist(tester.validate());
+    });
+
+    it('should validate when all attributes are in the schema', function () {
+      tester.set({ attr1: 'foobar' }, { silent: true });
+      should.not.exist(tester.validate());
+    });
+
+  });
+
 });

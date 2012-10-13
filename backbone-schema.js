@@ -32,15 +32,15 @@
           return '"' + key + '" must be a ' + type.prototype.constructor.name;
 
         for (var i=validators.length; i--;) {
-          var error = validators[i](attr);
+          var error = validators[i].call(this, attr);
           if (error) return error;
         }
 
         delete attrs[key];
       }
 
-      if (schema._isStrict && attrs.length)
-        return attrs.join(', ') + ' are not in the schema';
+      if (schema._isStrict && _.size(attrs))
+        return _.keys(attrs).join(', ') + ' are not in the schema';
     },
 
     validate: function (attrs) {
