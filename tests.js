@@ -1,7 +1,8 @@
-var should = require('should')
-  , Backbone = require('backbone');
+var isNode = typeof module !== 'undefined' && module.exports
+  , should = isNode ? require('chai').should() : window.chai.should()
+  , Backbone = isNode ? require('backbone') : window.Backbone;
 
-require('../backbone-schema');
+if (isNode) require('../backbone-schema');
 
 var TestModel = Backbone.Model.extend()
   , tester;
@@ -136,4 +137,3 @@ describe('When a Backbone models has a schema', function () {
   });
 
 });
-

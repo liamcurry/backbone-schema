@@ -14,7 +14,7 @@
     }
   , "devDependencies": {
       "mocha": "*"
-    , "should": "*"
+    , "chai": "*"
   }
   , "scripts": {
       "test": "./node_modules/.bin/mocha tests.js"
