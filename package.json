@@ -1,5 +1,5 @@
 {   "name": "backbone-schema"
-  , "version": "0.0.1"
+  , "version": "0.8.0"
   , "description": "Forced schemas for Backbone models."
   , "keywords": [ "Backbone", "schema", "model" ]
   , "repository": {
