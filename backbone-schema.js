@@ -1,10 +1,12 @@
-(function () {
+define(['Backbone'], function(backbone, require) {
 
   var isNode = typeof module !== 'undefined' && module.exports
     , _ = isNode ? require('underscore') : this._
     , Backbone = isNode ? require('backbone') : this.Backbone;
 
-  _.extend(Backbone.Model.prototype, {
+
+	var Schema = Backbone.Model.extend({
+  // _.extend( Backbone.Model.prototype, {
 
     validateSchema: function () {
       var schema = this.schema || {}
@@ -20,7 +22,7 @@
         if (field.required && !attr)
           return '"' + key + '" is required.';
 
-        if (!attr) continue;
+//        if (!attr) continue;
 
         if (choices && !_.contains(choices, attr))
           return '"' + key + '" must be one of ' + choices.join(', ');
@@ -48,5 +50,5 @@
     }
 
   });
-
-}.call(this));
+	return Schema;
+});
