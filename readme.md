@@ -57,6 +57,41 @@ liam.set('nickname', 'Liam'); // Good to go
 liam.set('joined', 'Tues');   // Emits an error because "joined" must be a date.
 ```
 
+#### Another Example After Refactoring ####
+
+```javascript
+define(['Backbone', 'BackboneSchema'], function(backbone, backboneschema, require) {
+
+	
+	var Post = backboneschema.extend({
+		
+		schema: {
+			url: { type: String }
+			, img: { type: String  }
+			, text: { type: String }
+			, title: { type: String }
+			, _isStrict: true
+		}, 
+		validate: function (attrs, options) {
+			var errors = [];
+			if (!this.attributes.url || this.attributes.url == '') {
+				errors.push({name: 'url', message: 'A post without an url is not possible.'});
+			}
+			val = this.validateSchema();
+			if(val != undefined){
+				errors.push({name: 'validate', message: val});
+			}
+			return errors.length > 0 ? errors : undefined;
+		},
+		initialize: function(){
+		}
+	});
+	return Post;
+});
+
+  
+```
+
 ### Extended example
 
 ```javascript
