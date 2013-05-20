@@ -12,6 +12,12 @@ issues are welcome.
 npm install backbone-schema
 ```
 
+or use [bower](http://bower.io) to install backbone-schema
+
+```
+bower install backbone-schema
+```
+
 Usage
 -----
 
