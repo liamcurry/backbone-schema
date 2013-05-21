@@ -1,16 +1,19 @@
-(function () {
+define(['Backbone'], function(backbone, require) {
 
   var isNode = typeof module !== 'undefined' && module.exports
     , _ = isNode ? require('underscore') : this._
     , Backbone = isNode ? require('backbone') : this.Backbone;
 
-  _.extend(Backbone.Model.prototype, {
+
+	var Schema = Backbone.Model.extend({
 
     validateSchema: function () {
       var schema = this.schema || {}
-        , attrs = this.attributes;
-
-      for (var key in schema) {
+        , attrs = JSON.parse(JSON.stringify(this.attributes)); // clone
+		for (var key in schema) {
+		
+		console.log("key: "+ key);
+		
         var attr = attrs[key]
           , field = schema[key]
           , type = typeof field === 'object' ? field.type : field
@@ -19,8 +22,12 @@
 
         if (field.required && !attr)
           return '"' + key + '" is required.';
-
-        if (!attr) continue;
+			if (!field) continue;
+			if(attr == undefined){
+				console.log("attr is undef for key: "+ key);
+				delete attrs[key]
+				continue;
+			}
 
         if (choices && !_.contains(choices, attr))
           return '"' + key + '" must be one of ' + choices.join(', ');
@@ -39,14 +46,17 @@
         delete attrs[key];
       }
 
-      if (schema._isStrict && _.size(attrs))
+      if (schema._isStrict && _.size(attrs)) {
         return _.keys(attrs).join(', ') + ' are not in the schema';
+      }
+      console.log("return true");
+      return true;
     },
 
-    validate: function (attrs) {
+    validateS: function (attrs) {
       return this.validateSchema();
     }
 
   });
-
-}.call(this));
+	return Schema;
+});

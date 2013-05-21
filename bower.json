@@ -1,0 +1,24 @@
+{
+  "name": "backbone-schema",
+  "description": "A minimalistic and lightweight schema validator for Backbone models.",
+  "version": "0.8.0",
+  "private": false,
+  "homepage": "https://github.com/petershaw/backbone-schema",
+  "keywords": [ "Backbone", "schema", "model" ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/petershaw/backbone-schema.git"
+  },
+  "author": "Liam Curry <liam@curry.name>, Peter Shaw <unthoughted@petershaw.de> (unthoughted.wordpress.org)",
+  "main": "backbone-schema.js",
+  "ignore": [
+  ],
+  "dependencies": {
+  	"underscore": ">=1.4.4",
+    "backbone": ">=1.0.0"
+  },
+  "devDependencies": {
+
+  }
+}
+
