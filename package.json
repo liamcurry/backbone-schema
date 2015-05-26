@@ -1,27 +1,34 @@
-{   "name": "backbone-schema"
-  , "version": "0.8.0"
-  , "description": "Forced schemas for Backbone models."
-  , "keywords": [ "Backbone", "schema", "model" ]
-  , "repository": {
-      "type": "git"
-    , "url": "git://github.com/liamcurry/backbone-schema.git"
-    }
-  , "bugs": {
-      "url": "https://github.com/liamcurry/backbone-schema/issues"
-    }
-  , "author": "Liam Curry <liam@curry.name>"
-  , "engines": { "node": ">= 0.2.0" }
-  , "main": "backbone-schema.js"
-  , "dependencies": {
-      "underscore": "*"
-    , "backbone": "*"
-    }
-  , "devDependencies": {
-      "mocha": "*"
-    , "chai": "*"
+{
+  "name": "backbone-schema",
+  "version": "0.8.1",
+  "description": "Forced schemas for Backbone models.",
+  "keywords": [
+    "Backbone",
+    "schema",
+    "model"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/liamcurry/backbone-schema.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liamcurry/backbone-schema/issues"
+  },
+  "author": "Liam Curry <liam@curry.name>",
+  "engines": {
+    "node": ">= 0.2.0"
+  },
+  "main": "backbone-schema.js",
+  "dependencies": {
+    "underscore": "*",
+    "backbone": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "chai-things": "*",
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha tests.js"
   }
-  , "scripts": {
-      "test": "./node_modules/.bin/mocha tests.js"
-  }
-  , "main": "backbone-schema.js"
 }
