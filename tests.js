@@ -1,6 +1,9 @@
 var isNode = typeof module !== 'undefined' && module.exports
-  , should = isNode ? require('chai').should() : window.chai.should()
+  , chai = isNode ? require('chai') : window.chai
+  , should = chai.should()
   , Backbone = isNode ? require('backbone') : window.Backbone;
+
+if (isNode) chai.use(require('chai-things'));
 
 if (isNode) require('../backbone-schema');
 
@@ -204,4 +207,73 @@ describe('When a Backbone models has a schema', function () {
 
   });
 
+  describe('and it is in multiple error mode it:', function () {
+    before(function () {
+      TestModel.prototype.schema = {
+        _allErrors: true
+        , _isStrict: true
+        , typeFiled: String
+        , requiredField: { required: true }
+        , startDate: {
+            type: Date,
+            validators: [
+              function (val) {
+                var endDate = this.get('endDate');
+                if (endDate && endDate < val) {
+                  return 'Start date cannot be after end date';
+                }
+              }
+            ]
+          }
+        , endDate: {
+          type: Date,
+          validators: [
+            function (val) {
+              var startDate = this.get('startDate');
+              if (startDate && startDate > val) {
+                return 'End date cannot be before start date';
+              }
+            }
+          ]
+        }
+      }
+    })
+
+    it('should retrun errors in an array when not validate', function () {
+      tester.set({
+        typeFiled: 125
+        , startDate: new Date('2012-01-01')
+        , endDate: new Date('2011-01-01')
+        , uknownField: "foo"
+      }, {
+        silent: true
+      });
+
+      validateResult = tester.validate();
+
+      validateResult.length.should.be.equal(5);
+
+      validateResult.should.all.have.property('key');
+      validateResult.should.all.have.property('errType');
+      validateResult.should.all.have.property('message');
+
+      validateResult.should.contain.an.item.with.property("errType", "required");
+      validateResult.should.contain.an.item.with.property("errType", "validator");
+      validateResult.should.contain.an.item.with.property("errType", "type");
+      validateResult.should.contain.an.item.with.property("errType", "strict");
+    });
+
+    it('should not return anything when validate', function () {
+      tester.set({
+        typeFiled: "foobar"
+        , requiredField: "foobar"
+        , startDate: new Date('2011-01-01')
+        , endDate: new Date('2012-01-01')
+      }, {
+        silent: true
+      });
+
+      should.not.exist(tester.validate());
+    });
+  })
 });

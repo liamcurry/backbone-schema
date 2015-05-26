@@ -85,6 +85,7 @@ var Message = Backbone.Model.extend({
           ]
       }
       , _isStrict: true       // Enables strict mode, which disallows arbitrary attributes
+      , _allErrors: true     // Enables error output in an array of object
     }
 
 });
